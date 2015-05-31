@@ -26,17 +26,17 @@ if [ ! -f "/vagrant/type" ]; then
 fi
 
 if [ -f "/vagrant/before_init.sh" ]; then
-    echo -e "Running /vagrant/before_init.sh ..."
+    echo "Running /vagrant/before_init.sh ..."
 
     sudo chmod +x "/vagrant/before_init.sh"
-    sudo -E "/vagrant/before_init.sh" > /dev/null
+    sudo -E "/vagrant/before_init.sh" &> /dev/null
 
     if [ "$?" -gt 0 ]; then
-        echo -e " failed\r\n"
+        echo " ... failed (${?})\r\n"
 
-        exit $?
+        exit "${?}"
     else
-        echo -e " done!\r\n"
+        echo " ... done!\r\n"
     fi
 fi
 
@@ -71,15 +71,21 @@ if [ -f "/tmp/vagrant-info.log" ]; then
 fi
 
 sudo chmod +x "/vagrant/${INSTALL_TYPE}/setup.sh" > /dev/null
-sudo -E "/vagrant/${INSTALL_TYPE}/setup.sh" > /tmp/vagrant-init.log
+sudo -E "/vagrant/${INSTALL_TYPE}/setup.sh" &> /tmp/vagrant-init.log
 
-echo -e "\r\n\r\n\r\n\r\n============================================\r\n\r\n\r\n\r\n"
+echo ""
+echo "============================================"
+echo ""
 
 if [ "$?" -gt 0 ]; then
-    echo -e "There is some error happened during init, please check log output:\r\n\r\n"
+    echo -e "\tThere is some error happened during init, please check log output:"
+    echo ""
 
     cat "/tmp/vagrant-init.log"
 else
+    echo -e "\tInstallation is completed!"
+    echo ""
+
     if [ -f "/tmp/vagrant-info.log" ]; then
         cat "/tmp/vagrant-info.log"
         echo -e "\r\n\r\n"
@@ -88,6 +94,8 @@ else
     echo "${HOST_NAME} is now ready, type 'vagrant ssh' to connect."
 fi
 
-echo -e "\r\n\r\n\r\n\r\n============================================\r\n\r\n\r\n\r\n"
+echo ""
+echo "============================================"
+echo ""
 
-exit $MAIN_SCRIPT_RESULT
+exit "${?}"

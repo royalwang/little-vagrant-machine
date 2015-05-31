@@ -17,7 +17,7 @@ fi
 service php5-fpm stop
 
 # Config modules
-php /vagrant/PHP/ModifyPHPModuleConfig.php "/etc/php5/mods-available" "/vagrant"
+php /vagrant/PHP/ModifyPHPModuleConfig.php "/etc/php5/mods-available" "/vagrant/PHP"
 
 echo "PHP5 has been installed." >> "/tmp/vagrant-info.log"
 
@@ -30,9 +30,11 @@ if [[ "$?" > 0 ]]; then
     exit $?
 fi
 
-echo "" >> "/etc/postgresql/9.4/main/pg_hba.conf"
+PG_HDA_CONTENT="$(cat '/etc/postgresql/9.4/main/pg_hba.conf')"
+echo "local all \"dev\" md5" > "/etc/postgresql/9.4/main/pg_hba.conf"
 echo "host all \"dev\" samenet md5" >> "/etc/postgresql/9.4/main/pg_hba.conf"
-echo "local all \"dev\" md5" >> "/etc/postgresql/9.4/main/pg_hba.conf"
+echo "" >> "/etc/postgresql/9.4/main/pg_hba.conf"
+echo "${PG_HDA_CONTENT}" >> "/etc/postgresql/9.4/main/pg_hba.conf"
 
 echo "" >> "/etc/postgresql/9.4/main/postgresql.conf"
 echo "listen_addresses = '*'" >> "/etc/postgresql/9.4/main/postgresql.conf"
