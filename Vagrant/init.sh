@@ -32,11 +32,11 @@ if [ -f "/vagrant/before_init.sh" ]; then
     sudo -E "/vagrant/before_init.sh" &> /dev/null
 
     if [ "$?" -gt 0 ]; then
-        echo " ... failed (${?})\r\n"
+        echo " ... failed (${?})"
 
         exit "${?}"
     else
-        echo " ... done!\r\n"
+        echo " ... done!"
     fi
 fi
 
