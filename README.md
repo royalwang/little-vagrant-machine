@@ -132,7 +132,7 @@ We currently had following few set ups.
 
 It will install Apache + PHP + PostgreSQL + Memcached into the new Vagrant VM, and build Apache Virtual Host for every each host with SSL support.
 
-Default Apache port is `8080` for HTTP access and `4443` for HTTPS access. Every each VM is configured to use domain to access, so `localhost:8080` or `127.0.0.1:4443` is not available. You can get their domain name after the init has finished.
+Default Apache port is `8080` for HTTP access and `4443` for HTTPS access. Every each VH is configured to use domain to access, so `localhost:8080` or `127.0.0.1:4443` is not available. You can get their domain name after the init has finished.
 
 Default user for PostgreSQL is `dev`, you can login with password `dev`. You can manage your database with GUI tool `pgAdmin` outside the VM with port `55432`.
 
