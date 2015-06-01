@@ -41,11 +41,11 @@ Or: https://www.sourcetreeapp.com/
 
 #### Linux users
 
-##### yum
+##### dnf
 
 Please use command
 
-    sudo yum install git
+    sudo dnf install git
 
 ##### apt-get
 
