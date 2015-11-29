@@ -31,7 +31,7 @@ if [ -f "/vagrant/before_init.sh" ]; then
     sudo chmod +x "/vagrant/before_init.sh"
     sudo -E "/vagrant/before_init.sh" &> /dev/null
 
-    if [ "$?" -gt 0 ]; then
+    if [[ "$?" -gt 0 ]]; then
         echo " ... failed (${?})"
 
         exit "${?}"
@@ -77,13 +77,13 @@ echo ""
 echo "============================================"
 echo ""
 
-if [ "$?" -gt 0 ]; then
-    echo -e "\tThere is some error happened during init, please check log output:"
+if [[ "$?" -gt 0 ]]; then
+    echo -e "\tThere is some error happened during init, please check log output:\r\n"
     echo ""
 
     cat "/tmp/vagrant-init.log"
 else
-    echo -e "\tInstallation is completed!"
+    echo -e "\tInstallation is completed!\r\n"
     echo ""
 
     if [ -f "/tmp/vagrant-info.log" ]; then
